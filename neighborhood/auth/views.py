@@ -5,6 +5,7 @@ from neighborhood.forms import MyUserRegForm, MyLoginForm
 from django.views import View
 
 
+# auth views
 class MyRegView(View):
 	form_class = MyUserRegForm
 	initial = {'key': 'value'}
@@ -22,7 +23,6 @@ class MyRegView(View):
 
 	def post(self, request, *args, **kwargs):
 		regform = self.form_class(request.POST)
-
 		if regform.is_valid():
 			regform.save()
 
@@ -30,7 +30,6 @@ class MyRegView(View):
 			messages.success(request, f'Account created for {username}')
 
 			return redirect(to='/user/profile/')
-
 		return render(request, self.template_name, {"regform": regform})
 
 class MyLoginView(LoginView):
@@ -38,9 +37,7 @@ class MyLoginView(LoginView):
 
 	def form_valid(self, form):
 		remember_me = form.cleaned_data.get('remember_me')
-
 		if not remember_me:
 			self.request.session.set_expiry(0)
 			self.request.session.modified = True
-
 		return super(MyLoginView, self).form_valid(form)
