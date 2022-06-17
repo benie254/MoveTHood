@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include, re_path as url
 from django.contrib.auth import views as auth_views
-from neighborhood.views import home, MyRegView,profile,MyLoginView,ChangePassView,ResetPassView
-from neighborhood.forms import MyUserRegForm,MyLoginForm
+from neighborhood.views import home, MyRegView,profile,MyLoginView
+from neighborhood.forms import MyLoginForm
 
 urlpatterns = [
     path('admin/', admin.site.urls),
