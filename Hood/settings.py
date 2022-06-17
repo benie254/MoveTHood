@@ -86,6 +86,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_registration',
     'social_django',
+    'django_google_maps',
 ]
 
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
@@ -253,14 +254,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
+GOOGLE_MAPS_API_KEY = 'AIzaSyBAas6IxBAmkmmGer97vBsSc1E8sGXD9J4'
+
 LOCATION_FIELD = {
     'map.provider': 'google',
-
     'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
-    'provider.google.api_key': '',
-    'provider.google.api_libraries': '',
-    'provider.google.map.type': 'ROADMAP',
+    'provider.google.api_key': 'AIzaSyBAas6IxBAmkmmGer97vBsSc1E8sGXD9J4',
 }
+
 
 # add configs
 cloudinary.config(
