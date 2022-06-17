@@ -56,19 +56,6 @@ class MyLoginView(LoginView):
 
 		return super(MyLoginView, self).form_valid(form)
 
-class ResetPassView(SuccessMessageMixin, PasswordResetView):
-	template_name = 'auth/password_reset.html'
-	email_template_name = 'auth/password_reset_email.html'
-	subject_template_name = 'auth/password_reset_subject'
-	success_message = 'Please check your email for your password reset instructions. If you do not receive an ' \
-						'email from us, please confirm that the details you submitted are correct or check your spam ' \
-						'folder. '
-	success_url = reverse_lazy('home')
-
-class ChangePassView(SuccessMessageMixin,PasswordChangeView):
-	template_name = 'auth/change_password.html'
-	success_message = 'Password successfully updated!'
-	success_url = reverse_lazy('home')
 
 @login_required
 def profile(request):
