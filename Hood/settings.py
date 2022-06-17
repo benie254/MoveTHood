@@ -90,6 +90,8 @@ INSTALLED_APPS = [
     'django_registration',
 ]
 
+# AUTH_USER_MODEL = 'neighborhood.User'
+
 ACCOUNT_ACTIVATION_DAYS = 1
 REGISTRATION_OPEN = True
 # REGISTRATION_SALT
