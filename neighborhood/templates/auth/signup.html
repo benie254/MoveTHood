@@ -1,0 +1,10 @@
+{%load bootstrap5%}
+
+<form action="/hood/register/" method="POST">
+                        {%csrf_token%}
+                        {%bootstrap_form regform %}
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+                        </div>
+                        <input type="hidden" name="next" value="{{next}}">
+                    </form>
