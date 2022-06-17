@@ -1,13 +1,7 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth import login, authenticate
-from neighborhood.forms import MyUserRegForm, MyLoginForm, UserUpdateForm, ProfileUpdateForm
-from neighborhood.models import MyUser
-from django.views import View
+from neighborhood.forms import UserUpdateForm, ProfileUpdateForm
 
 
 # Create your views here.
