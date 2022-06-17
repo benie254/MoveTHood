@@ -23,7 +23,7 @@ class MyRegView(View):
 
 	def dispatch(self, request, *args, **kwargs):
 		if request.user.is_authenticated:
-			return redirect(to='/')
+			return redirect(to='/user/profile/')
 
 		return super(MyRegView, self).dispatch(request, *args, **kwargs)
 
@@ -40,7 +40,7 @@ class MyRegView(View):
 			username = regform.cleaned_data.get('username')
 			messages.success(request, f'Account created for {username}')
 
-			return redirect(to='/')
+			return redirect(to='/user/profile/')
 
 		return render(request, self.template_name, {"regform": regform})
 
@@ -72,6 +72,7 @@ class ChangePassView(SuccessMessageMixin,PasswordChangeView):
 
 @login_required
 def profile(request):
+	title = 'Profile'
 	if request.method == 'POST':
 		update_user_form = UserUpdateForm(request.POST,instance=request.user)
 		update_profile_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
@@ -86,3 +87,6 @@ def profile(request):
 			update_user_form = UserUpdateForm(instance=request.user)
 			update_profile_form = ProfileUpdateForm(instance=request.user.profile)
 		return render(request,'user/profile.html',{'update_user_form':update_user_form,'update_profile_form':update_profile_form})
+
+	return render(request,'user/profile.html',{"title":title})
+

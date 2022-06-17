@@ -25,6 +25,6 @@ urlpatterns = [
     path('user/profile/',profile,name='profile'),
     path('user/register/',MyRegView.as_view(),name='register'),
     path('user/login/',MyLoginView.as_view(redirect_authenticated_user=True,template_name='auth/login.html',authentication_form=MyLoginForm),name='login'),
-    path('user/logout/',auth_views.LogoutView.as_view(template_name='auth/logout.html'),name='logout'),
+    path('user/logout/',auth_views.LogoutView.as_view(template_name='auth/login.html'),name='logout'),
     url(r'^oauth/',include('social_django.urls',namespace='social')),
 ]
