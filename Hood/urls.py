@@ -23,6 +23,8 @@ from neighborhood.forms import MyLoginForm
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home,name='home'),
+    path('user/info/locale/',location,name='location'),
+    path('user/info/hood/',hood,name='hood'),
     path('user/profile/',profile,name='profile'),
     path('user/register/',MyRegView.as_view(),name='register'),
     path('user/login/',MyLoginView.as_view(redirect_authenticated_user=True,template_name='auth/login.html',authentication_form=MyLoginForm),name='login'),
