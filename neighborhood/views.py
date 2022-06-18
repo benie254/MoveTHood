@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from neighborhood.forms import UserUpdateForm, ProfileUpdateForm,LocationForm,HoodForm,ProfileForm
-from neighborhood.models import Location,UserHood,UserProfile
+from neighborhood.models import Location,UserHood,UserProfile,Business
+from neighborhood.api.serializers import BizSerializer
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
 # Create your views here.
@@ -80,3 +83,11 @@ def profile(request):
 # 		return render(request,'user/profile.html',{'update_user_form':update_user_form,'update_profile_form':update_profile_form})
 # 	return render(request,'user/profile.html',{"title":title,'update_user_form':update_user_form,'update_profile_form':update_profile_form})
 #
+
+class BusinessList(APIView):
+	def get(self,request,format='None'):
+		current_user = request.user
+		user_location = Location.objects.filter(pk=current_user.id)
+		businesses = Business.objects.filter(location=user_location)
+		serializers = BizSerializer(businesses,many=True)
+		return Response(serializers.data)
