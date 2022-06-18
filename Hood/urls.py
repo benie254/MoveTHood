@@ -19,6 +19,7 @@ from django.contrib.auth import views as auth_views
 from neighborhood.auth.views import MyRegView,MyLoginView
 from neighborhood.views import home,profile,location,hood
 from neighborhood.forms import MyLoginForm
+from neighborhood import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +31,5 @@ urlpatterns = [
     path('user/login/',MyLoginView.as_view(redirect_authenticated_user=True,template_name='auth/login.html',authentication_form=MyLoginForm),name='login'),
     path('user/logout/',auth_views.LogoutView.as_view(template_name='auth/login.html'),name='logout'),
     url(r'^oauth/',include('social_django.urls',namespace='social')),
+    path('api/hood/business/',views.BusinessList.as_view()),
 ]

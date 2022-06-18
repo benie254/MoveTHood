@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from neighborhood.forms import UserUpdateForm, ProfileUpdateForm,LocationForm,HoodForm,ProfileForm
-from neighborhood.models import Location,UserHood,UserProfile,Business
+from neighborhood.models import Location,UserHood,UserProfile,Business,MyUser
 from neighborhood.api.serializers import BizSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -86,8 +86,7 @@ def profile(request):
 
 class BusinessList(APIView):
 	def get(self,request,format='None'):
-		current_user = request.user
-		user_location = Location.objects.filter(pk=current_user.id)
-		businesses = Business.objects.filter(location=user_location)
+		current_user = MyUser.location
+		businesses = Business.objects.filter(location=current_user)
 		serializers = BizSerializer(businesses,many=True)
 		return Response(serializers.data)
