@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include, re_path as url
 from django.contrib.auth import views as auth_views
-from neighborhood.views import home, MyRegView,profile,MyLoginView
+from neighborhood.auth.views import MyRegView,MyLoginView
+from neighborhood.views import home,profile
 from neighborhood.forms import MyLoginForm
 
 urlpatterns = [
