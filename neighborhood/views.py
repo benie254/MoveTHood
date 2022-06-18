@@ -13,6 +13,8 @@ def home(request):
 @login_required
 def profile(request):
 	title = 'Profile'
+	update_user_form = UserUpdateForm
+	update_profile_form = ProfileUpdateForm
 	if request.method == 'POST':
 		update_user_form = UserUpdateForm(request.POST,instance=request.user)
 		update_profile_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
@@ -25,5 +27,5 @@ def profile(request):
 			update_user_form = UserUpdateForm(instance=request.user)
 			update_profile_form = ProfileUpdateForm(instance=request.user.profile)
 		return render(request,'user/profile.html',{'update_user_form':update_user_form,'update_profile_form':update_profile_form})
-	return render(request,'user/profile.html',{"title":title})
+	return render(request,'user/profile.html',{"title":title,'update_user_form':update_user_form,'update_profile_form':update_profile_form})
 

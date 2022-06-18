@@ -1,6 +1,6 @@
 from django_registration.forms import RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
-from neighborhood.models import MyUser,UserProfile
+from neighborhood.models import MyUser,UserProfile,Location,UserHood
 from django import forms
 
 
@@ -24,4 +24,14 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('avatar','bio','location','hood')
+        fields = ('avatar','bio')
+
+class LocationForm(forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = ('address','geolocation')
+
+class NeighborhoodForm(forms.ModelForm):
+    class Meta:
+        model = UserHood
+        fields = ('name')
