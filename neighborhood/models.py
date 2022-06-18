@@ -42,13 +42,13 @@ class MyUser(AbstractBaseUser,PermissionsMixin):
 # content models below
 class Location(models.Model):
     address = map_fields.AddressField(max_length=200,default='')
-    geolocation = map_fields.GeoLocationField(max_length=100,default='')
+    user = models.OneToOneField(MyUser, on_delete=models.DO_NOTHING, null=True)
 
 
 class UserHood(models.Model):
     name = models.CharField(max_length=40,default='')
 
-    location = models.ForeignKey(Location,on_delete=models.DO_NOTHING)
+    user = models.OneToOneField(MyUser, on_delete=models.DO_NOTHING,null=True)
 
 
 class UserProfile(models.Model):
@@ -56,9 +56,7 @@ class UserProfile(models.Model):
     avatar = models.ImageField(default='tester.png')
     created = models.DateTimeField(auto_now_add=True, null=True)
 
-    user = models.OneToOneField(MyUser, on_delete=models.DO_NOTHING)
-    hood = models.ForeignKey(UserHood,on_delete=models.DO_NOTHING)
-    location = models.ForeignKey(Location,on_delete=models.DO_NOTHING)
+    user = models.OneToOneField(MyUser, on_delete=models.DO_NOTHING,null=True)
 
     def __str__(self):
         return self.avatar
@@ -75,23 +73,19 @@ class UserProfile(models.Model):
 
 class UserPost(models.Model):
     title = models.CharField(max_length=60,null=False,default='')
-    description = models.TextField()
+    description = models.TextField(default='')
     published = models.DateTimeField(auto_now_add=True,null=True)
 
-    author = models.ForeignKey(MyUser,on_delete=models.DO_NOTHING)
-    location = models.ForeignKey(Location,on_delete=models.DO_NOTHING)
-    hood = models.ForeignKey(UserHood,on_delete=models.DO_NOTHING)
+    author = models.ForeignKey(MyUser,on_delete=models.DO_NOTHING,null=True)
 
 
 class Business(models.Model):
     name = models.CharField(max_length=40,default='')
     description = models.TextField()
+    location = map_fields.AddressField(max_length=200,default='')
     email = models.EmailField(max_length=150)
     phone = models.PositiveIntegerField(default=254,validators=[MinValueValidator(1),MaxValueValidator(10)])
     published = models.DateTimeField(auto_now_add=True, null=True)
-
-    location = models.ForeignKey(Location,on_delete=models.DO_NOTHING)
-    hood = models.ForeignKey(UserHood,on_delete=models.DO_NOTHING)
 
 
 class Chama(models.Model):
@@ -99,9 +93,7 @@ class Chama(models.Model):
     description = models.TextField()
     created = models.DateTimeField(auto_now_add=True, null=True)
 
-    member = models.ForeignKey(MyUser,on_delete=models.DO_NOTHING)
-    location = models.ForeignKey(Location,on_delete=models.DO_NOTHING)
-    hood = models.ForeignKey(UserHood,on_delete=models.DO_NOTHING)
+    member = models.ForeignKey(MyUser,on_delete=models.DO_NOTHING,null=True)
 
 
 class PoliceChief(models.Model):
@@ -110,9 +102,6 @@ class PoliceChief(models.Model):
     email = models.EmailField(max_length=150)
     added = models.DateTimeField(auto_now_add=True, null=True)
 
-    location = models.ForeignKey(Location,on_delete=models.DO_NOTHING)
-    hood = models.ForeignKey(UserHood,on_delete=models.DO_NOTHING)
-
 
 class PoliceDept(models.Model):
     name = models.CharField(max_length=60,default='')
@@ -120,16 +109,11 @@ class PoliceDept(models.Model):
     phone = models.PositiveIntegerField(default=254,validators=[MinValueValidator(1),MaxValueValidator(10)])
     created = models.DateTimeField(auto_now_add=True,null=True)
 
-    chief = models.ForeignKey(PoliceChief, on_delete=models.DO_NOTHING)
-    location = models.ForeignKey(Location,on_delete=models.DO_NOTHING)
-    hood = models.ForeignKey(UserHood,on_delete=models.DO_NOTHING)
+    chief = models.ForeignKey(PoliceChief, on_delete=models.DO_NOTHING,null=True)
 
 
 class HealthDept(models.Model):
     name = models.CharField(max_length=60,default='')
     email = models.EmailField(max_length=150)
     phone = models.PositiveIntegerField(default=254, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    created = models.DateTimeField(auto_now_add=True, null=True)
-
-    location = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
-    hood = models.ForeignKey(UserHood, on_delete=models.DO_NOTHING)
+    created = models.DateTimeField(auto_now_add=True,null=True)

@@ -13,7 +13,7 @@ class MyRegView(View):
 
 	def dispatch(self, request, *args, **kwargs):
 		if request.user.is_authenticated:
-			return redirect(to='/user/info/')
+			return redirect(to='/user/info/locale/')
 
 		return super(MyRegView, self).dispatch(request, *args, **kwargs)
 
@@ -29,7 +29,7 @@ class MyRegView(View):
 			username = regform.cleaned_data.get('username')
 			messages.success(request, f'Account created for {username}')
 
-			return redirect(to='/user/info/')
+			return redirect(to='/user/info/locale/')
 		return render(request, self.template_name, {"regform": regform})
 
 class MyLoginView(LoginView):
