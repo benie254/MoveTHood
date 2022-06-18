@@ -34,4 +34,4 @@ class LocationForm(forms.ModelForm):
 class NeighborhoodForm(forms.ModelForm):
     class Meta:
         model = UserHood
-        fields = ('name')
+        fields = ('name',)
