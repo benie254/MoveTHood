@@ -36,5 +36,5 @@ urlpatterns = [
     path('api/hood/posts/<address>/', views.HoodPosts.as_view()),
     path('api/hood/chamas/<address>/', views.HoodChamas.as_view()),
     path('api/hood/police/<address>/', views.HoodPolice.as_view()),
-    # path('api/hood/health/<address>/', views.HoodHealth.as_view()),
+    path('api/hood/health/<address>/', views.HoodHealth.as_view()),
 ]
