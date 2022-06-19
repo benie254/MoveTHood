@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from neighborhood.forms import UserUpdateForm, ProfileUpdateForm,LocationForm,HoodForm,ProfileForm
 from neighborhood.models import Location,UserHood,UserProfile,Business,MyUser,UserPost,Chama,PoliceDept,HealthDept
-from neighborhood.api.serializers import BizSerializer
+from neighborhood.api.serializers import BizSerializer,PostSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -106,5 +106,5 @@ class HoodPosts(APIView):
 		posts = UserPost.objects.filter(address=address)
 		print(userloc)
 		print(posts)
-		serializers = BizSerializer(posts, many=True)
+		serializers = PostSerializer(posts, many=True)
 		return Response(serializers.data)
