@@ -8,7 +8,7 @@ class MyUserRegForm(RegistrationForm):
 
     class Meta:
         model = MyUser
-        fields = ('display_name','first_name','last_name','username','email',)
+        fields = ('first_name','last_name','username','email',)
 
 class MyLoginForm(AuthenticationForm):
     remember_me = forms.BooleanField(required=False )
@@ -44,4 +44,4 @@ class ProfileForm(forms.ModelForm):
 class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
-        fields = ('name','description','location','email','phone')
+        fields = ('name','description','address','email','phone',)

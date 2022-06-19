@@ -32,4 +32,5 @@ urlpatterns = [
     path('user/logout/',auth_views.LogoutView.as_view(template_name='auth/login.html'),name='logout'),
     url(r'^oauth/',include('social_django.urls',namespace='social')),
     path('api/hood/business/',views.BusinessList.as_view()),
+    path('api/hood/business/<address>/',views.BusinessList.as_view())
 ]

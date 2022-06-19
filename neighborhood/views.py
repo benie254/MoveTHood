@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from neighborhood.forms import UserUpdateForm, ProfileUpdateForm,LocationForm,HoodForm,ProfileForm
@@ -22,7 +22,7 @@ def location(request):
 			print('valid!')
 			address = locform.cleaned_data['address']
 			location = Location(address=address)
-			# location.creator = current_user
+			location.user = current_user
 			location.save()
 			return redirect('hood')
 	else:
@@ -38,7 +38,7 @@ def hood(request):
 			print('valid!')
 			name = hoodform.cleaned_data['name']
 			hood = UserHood(name=name)
-			# location.creator = current_user
+			hood.user = current_user
 			hood.save()
 			return redirect('profile')
 	else:
@@ -52,9 +52,10 @@ def profile(request):
 		profileform = ProfileForm(request.POST, request.FILES)
 		if profileform.is_valid():
 			print('valid!')
+			display_name = profileform.cleaned_data['display_name']
 			bio = profileform.cleaned_data['bio']
 			avatar = profileform.cleaned_data['avatar']
-			profile = UserProfile(bio=bio, avatar=avatar)
+			profile = UserProfile(bio=bio, avatar=avatar,display_name=display_name)
 			profile.user = current_user
 			profile.save()
 		return redirect('profile')
@@ -85,8 +86,16 @@ def profile(request):
 #
 
 class BusinessList(APIView):
-	def get(self,request,format='None'):
-		current_user = MyUser.location
-		businesses = Business.objects.filter(location=current_user)
-		serializers = BizSerializer(businesses,many=True)
+	# def get_biz(self,id):
+	# 	try:
+	# 		return Business.objects.get(location=id)
+	# 	except Business.DoesNotExist:
+	# 		return Http404
+
+	def get(self,request,address, format=None):
+		userloc = UserHood.objects.get(name=address)
+		business = Business.objects.filter(address=address)
+		print(userloc)
+		print(business)
+		serializers = BizSerializer(business,many=True)
 		return Response(serializers.data)
