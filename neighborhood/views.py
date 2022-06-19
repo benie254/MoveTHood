@@ -126,3 +126,12 @@ class HoodPolice(APIView):
 		print(police)
 		serializers = PoliceSerializer(police, many=True)
 		return Response(serializers.data)
+
+class HoodHealth(APIView):
+	def get(self, request, address, format=None):
+		userloc = UserHood.objects.get(name=address)
+		health = HealthDept.objects.filter(address=address)
+		print(userloc)
+		print(health)
+		serializers = HealthSerializer(health, many=True)
+		return Response(serializers.data)
