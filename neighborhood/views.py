@@ -117,3 +117,12 @@ class HoodChamas(APIView):
 		print(chamas)
 		serializers = ChamaSerializer(chamas, many=True)
 		return Response(serializers.data)
+
+class HoodPolice(APIView):
+	def get(self, request, address, format=None):
+		userloc = UserHood.objects.get(name=address)
+		police = PoliceDept.objects.filter(address=address)
+		print(userloc)
+		print(police)
+		serializers = PoliceSerializer(police, many=True)
+		return Response(serializers.data)
