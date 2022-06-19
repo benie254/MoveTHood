@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect,Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from neighborhood.forms import UserUpdateForm, ProfileUpdateForm,LocationForm,HoodForm,ProfileForm
-from neighborhood.models import Location,UserHood,UserProfile,Business,MyUser
+from neighborhood.models import Location,UserHood,UserProfile,Business,MyUser,UserPost,Chama,PoliceDept,HealthDept
 from neighborhood.api.serializers import BizSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -85,7 +85,7 @@ def profile(request):
 # 	return render(request,'user/profile.html',{"title":title,'update_user_form':update_user_form,'update_profile_form':update_profile_form})
 #
 
-class BusinessList(APIView):
+class HoodBusiness(APIView):
 	# def get_biz(self,id):
 	# 	try:
 	# 		return Business.objects.get(location=id)
@@ -98,4 +98,13 @@ class BusinessList(APIView):
 		print(userloc)
 		print(business)
 		serializers = BizSerializer(business,many=True)
+		return Response(serializers.data)
+
+class HoodPosts(APIView):
+	def get(self, request, address, format=None):
+		userloc = UserHood.objects.get(name=address)
+		posts = UserPost.objects.filter(address=address)
+		print(userloc)
+		print(posts)
+		serializers = BizSerializer(posts, many=True)
 		return Response(serializers.data)
