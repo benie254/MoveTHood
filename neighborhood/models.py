@@ -45,7 +45,7 @@ class Location(models.Model):
 
 
 class UserHood(models.Model):
-    name = models.CharField(max_length=40,default='')
+    name = map_fields.AddressField(max_length=200,default='')
 
     user = models.OneToOneField(MyUser, on_delete=models.DO_NOTHING,null=True)
 
@@ -75,12 +75,12 @@ class UserPost(models.Model):
 class Business(models.Model):
     name = models.CharField(max_length=40,default='')
     description = models.TextField()
-    address = map_fields.AddressField(max_length=200, default='')
+    hood_name = map_fields.AddressField(max_length=200, default='')
     email = models.EmailField(max_length=150)
     phone = models.PositiveIntegerField(default=254,validators=[MinValueValidator(1),MaxValueValidator(10)])
     published = models.DateTimeField(auto_now_add=True, null=True)
 
-    user = models.ForeignKey(MyUser,on_delete=models.DO_NOTHING, null=True)
+    user = models.ForeignKey(MyUser,on_delete=models.DO_NOTHING,null=True)
     hood = models.ForeignKey(UserHood,on_delete=models.DO_NOTHING, null=True)
 
     @classmethod

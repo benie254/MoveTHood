@@ -72,13 +72,13 @@ def biz(request):
 			print('valid!')
 			name = bizform.cleaned_data['name']
 			description = bizform.cleaned_data['description']
-			address = bizform.cleaned_data['address']
+			hood_name = bizform.cleaned_data['hood_name']
 			email = bizform.cleaned_data['email']
 			phone = bizform.cleaned_data['phone']
-			business = Business(name=name,description=description,address=address,email=email,phone=phone)
-			business.user = current_user
+			business = Business(name=name,description=description,hood_name=hood_name,email=email,phone=phone)
+			# business.user = current_user
 			business.save()
-		return redirect('home')
+		return redirect('biz')
 	else:
 		bizform = BusinessForm
 
