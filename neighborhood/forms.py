@@ -44,4 +44,4 @@ class ProfileForm(forms.ModelForm):
 class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
-        fields = ('name','description','address','email','phone',)
+        fields = ('name','description','address','email','phone','hood')

@@ -80,7 +80,8 @@ class Business(models.Model):
     phone = models.PositiveIntegerField(default=254,validators=[MinValueValidator(1),MaxValueValidator(10)])
     published = models.DateTimeField(auto_now_add=True, null=True)
 
-    owner = models.ForeignKey(MyUser, on_delete=models.DO_NOTHING, null=True)
+    user = models.ForeignKey(MyUser,on_delete=models.DO_NOTHING, null=True)
+    hood = models.ForeignKey(UserHood,on_delete=models.DO_NOTHING, null=True)
 
     @classmethod
     def search_by_location(cls, location_term):
