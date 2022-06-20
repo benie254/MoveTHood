@@ -1,0 +1,5 @@
+<form method="post" action="{% url 'profile' %}" enctype="multipart/form-data" style="text-align:center;">
+            {% csrf_token %}
+            {% bootstrap_form bizform layout='inline' %}
+            <button type="submit" class="btn btn-sm btn-outline-dark btn-success" value="Post" style="margin-top:1.5%;">Update profile</button>
+</form>
