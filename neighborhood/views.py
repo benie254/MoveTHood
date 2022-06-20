@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect,Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from neighborhood.forms import UserUpdateForm, ProfileUpdateForm,LocationForm,HoodForm,ProfileForm
+from neighborhood.forms import UserUpdateForm, ProfileUpdateForm,LocationForm,HoodForm,ProfileForm,BusinessForm
 from neighborhood.models import Location,UserHood,UserProfile,Business,MyUser,UserPost,Chama,PoliceDept,HealthDept
 from neighborhood.api.serializers import BizSerializer,PostSerializer,ChamaSerializer,PoliceSerializer,HealthSerializer
 from rest_framework.response import Response
@@ -62,6 +62,28 @@ def profile(request):
 		profileform = ProfileForm
 
 	return render(request,'user/profile.html',{"profileform":profileform})
+
+@login_required
+def biz(request):
+	current_user = request.user
+	if request.method == 'POST':
+		bizform = BusinessForm(request.POST, request.FILES)
+		if bizform.is_valid():
+			print('valid!')
+			name = bizform.cleaned_data['name']
+			description = bizform.cleaned_data['description']
+			address = bizform.cleaned_data['address']
+			email = bizform.cleaned_data['email']
+			phone = bizform.cleaned_data['phone']
+			hood = bizform.cleaned_data['hood']
+			business = Business(name=name,description=description,address=address,email=email,phone=phone,hood=hood)
+			business.user = current_user
+			business.save()
+		return redirect('home')
+	else:
+		bizform = BusinessForm
+
+	return render(request,'user/profile.html',{"bizform":bizform})
 
 
 # @login_required
