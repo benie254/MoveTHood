@@ -27,11 +27,11 @@
                 </div>
                 <div class="panel-body">
                     <a href="{% url 'social:begin' 'github' %}" class="btn btn-link btn-lg active btn-block">Sign in with GitHub</a>
-                    <form action="/user/login/" method="post">
+                    <form action="/user/login/" method="post" style="text-align:center;">
                         {%csrf_token%}
                         {%bootstrap_form form%}
                         <div class="form-group">
-                            <input type="submit" class="btn btn-primary btn-sm" value="Sign in">
+                            <input type="submit" class="btn btn-dark btn-outline-info btn-sm" value="Sign in" style="margin-top:1.5%;">
                         </div>
                         <input type="hidden" name="next" value="{{next}}">
                     </form>
