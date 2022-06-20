@@ -1,4 +1,4 @@
-{%extend 'base.html'%}
+{%extends 'base.html'%}
 {%load static%}
 {%load bootstrap5%}
 {%load bootstrap4%}
@@ -28,9 +28,9 @@
                 <div class="panel-body">
                     <form action="/user/register/" method="post">
                         {%csrf_token%}
-                        {{regform|crispy}}
+                        {%bootstrap_form regform layout='inline'%}
                         <div class="form-group">
-                            <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Sign Up" style="margin-top:1.5%;">
                         </div>
                         <input type="hidden" name="next" value="{{next}}">
                     </form>
