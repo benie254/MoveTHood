@@ -46,8 +46,9 @@ def hood(request):
 	return render(request,'user/hood.html',{"hoodform":hoodform})
 
 @login_required
-def profile(request):
-	current_user = request.user
+def profile(request,pk):
+	profile = UserProfile.objects.filter(pk=pk)
+	user = request.user
 	if request.method == 'POST':
 		profileform = ProfileForm(request.POST, request.FILES)
 		if profileform.is_valid():
@@ -55,13 +56,13 @@ def profile(request):
 			bio = profileform.cleaned_data['bio']
 			avatar = profileform.cleaned_data['avatar']
 			profile = UserProfile(bio=bio, avatar=avatar)
-			profile.user = current_user
+			profile.user = user
 			profile.save()
-		return redirect('profile')
+		return redirect('profile',user.id)
 	else:
 		profileform = ProfileForm
 
-	return render(request,'user/profile.html',{"profileform":profileform})
+	return render(request,'user/profile.html',{"profileform":profileform,"profile":profile})
 
 @login_required
 def biz(request):
