@@ -83,7 +83,7 @@ def biz(request):
 	else:
 		bizform = BusinessForm
 
-	return render(request,'user/profile.html',{"bizform":bizform})
+	return render(request,'hood/business.html',{"bizform":bizform})
 
 
 # @login_required
