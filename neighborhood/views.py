@@ -75,8 +75,7 @@ def biz(request):
 			address = bizform.cleaned_data['address']
 			email = bizform.cleaned_data['email']
 			phone = bizform.cleaned_data['phone']
-			hood = bizform.cleaned_data['hood']
-			business = Business(name=name,description=description,address=address,email=email,phone=phone,hood=hood)
+			business = Business(name=name,description=description,address=address,email=email,phone=phone)
 			business.user = current_user
 			business.save()
 		return redirect('home')
