@@ -52,10 +52,9 @@ def profile(request):
 		profileform = ProfileForm(request.POST, request.FILES)
 		if profileform.is_valid():
 			print('valid!')
-			display_name = profileform.cleaned_data['display_name']
 			bio = profileform.cleaned_data['bio']
 			avatar = profileform.cleaned_data['avatar']
-			profile = UserProfile(bio=bio, avatar=avatar,display_name=display_name)
+			profile = UserProfile(bio=bio, avatar=avatar)
 			profile.user = current_user
 			profile.save()
 		return redirect('profile')
