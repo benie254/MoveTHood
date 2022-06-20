@@ -1,3 +1,4 @@
+{%extends 'base.html'%}
 {%load bootstrap5%}
 {%load static%}
 
@@ -10,11 +11,7 @@
 
     </div>
     <div class="col-md-5">
-        <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data" style="text-align:center;">
-            {% csrf_token %}
-            {% bootstrap_form profileform layout='inline' %}
-            <button type="submit" class="btn btn-sm btn-outline-dark btn-success" value="Post" style="margin-top:1.5%;">Update profile</button>
-        </form>
+
     </div>
     <div class="col-md-5">
 
@@ -23,5 +20,95 @@
 
     </div>
     </div>
+
+
+<div class="container">
+    <div class="row" style="margin-top:1.5%;">
+    {%if profile%}
+    <div class="col-lg-2">
+        <img src="{{profile.avatar.url}}" alt="Change profile photo" class="cuser-p-photo img-responsive" width="150" height="150" style="border-radius:50%;">
+    </div>
+    <div class="col-lg-4">
+        <h1>{{username}}</h1>
+        <h6>{{profile.bio}}</h6>
+        {%else%}
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data" style="text-align:center;">
+                {% csrf_token %}
+                {% bootstrap_form profileform layout='inline' %}
+                <button type="submit" class="btn btn-sm btn-outline-dark btn-success" value="Post" style="margin-top:1.5%;">Update profile</button>
+            </form>
+        </div>
+        <div class="col-sm-4"></div>
+        {%endif%}
+        <hr style="margin-top:1.5%;">
+        <div class="row">
+            <div class="col-sm-4">
+               {%if posts%}
+                <p><span><strong>{{posts|length}}</strong></span> posts</p>
+                {%else%}
+                <p>0 projects</p>
+                {%endif%}
+            </div>
+            <div class="col-sm-4">
+                {%if chamas%}
+                <p><span><strong>{{chamas|length}}</strong></span> chamas</p>
+                {%else%}
+                <p>0 chamas</p>
+                {%endif%}
+            </div>
+            <div class="col-sm-4">
+                {%if businesses%}
+                <p><span><strong>{{businesses|length}}</strong></span> businesses</p>
+                {%else%}
+                <p>0 businesses</p>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4"></div>
+</div>
+
+<hr>
+
+{%if contact%}
+    <div class="container">
+        <div class="table-responsive">
+        <table class="table table-striped-columns table-hover" style="width:80%;margin-left:7.5%;">
+    <thead class="table-info">
+    <tr class="table-active">
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Address</th>
+    </tr>
+  </thead>
+    <tbody class="table-success">
+    <tr class="table-active">
+        <td class="table-active">{{contact.first_name}}</td>
+        <td class="table-active">{{contact.last_name}}</td>
+        <td class="table-active">{{contact.email}}</td>
+        <td class="table-active">{{contact.phone}}</td>
+        <td class="table-active">{{contact.address}}</td>
+    </tr>
+    </tbody>
+</table>
+    </div>
+    </div>
+{%else%}
+    <div class="container">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <p>Add your contact details <a href="" type="button" class="btn btn-outline-info btn-dark btn-sm">here</a></p>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+{%endif%}
+<hr>
+
+</div>
 </div>
 {%endblock%}
