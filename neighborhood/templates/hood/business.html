@@ -1,3 +1,4 @@
+{%load bootstrap5%}
 <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data" style="text-align:center;">
             {% csrf_token %}
             {% bootstrap_form bizform layout='inline' %}
