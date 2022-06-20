@@ -85,9 +85,9 @@ def biz(request):
 def search(request):
 
 	if 'business' in request.GET and request.GET["business"]:
-		search_term = request.GET.get("business")
-		searched_businesses = Business.search_by_term(search_term)
-		message = f"{search_term}"
+		hood_name = request.GET.get("business")
+		searched_businesses = Business.search_by_location(hood_name)
+		message = f"{hood_name}"
 
 		return render(request,'hood/search_results.html',{"message":message,"businesses":searched_businesses})
 	else:
