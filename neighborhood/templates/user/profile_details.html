@@ -1,0 +1,16 @@
+{%block profile_details%}
+{%if profile%}
+<h1>{{username}}</h1>
+<h6>{{profile.bio}}</h6>
+{%else%}
+<div class="col-sm-4"></div>
+<div class="col-sm-4">
+    <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data" style="text-align:center;">
+        {% csrf_token %}
+        {% bootstrap_form profileform layout='inline' %}
+        <button type="submit" class="btn btn-sm btn-outline-dark btn-success" value="Post" style="margin-top:1.5%;">Update profile</button>
+    </form>
+</div>
+<div class="col-sm-4"></div>
+{%endif%}
+{%endblock%}
