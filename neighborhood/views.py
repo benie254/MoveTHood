@@ -31,23 +31,23 @@ def location(request):
 
 @login_required
 def hood(request):
-	current_user = request.user
+	user = request.user
 	if request.method == 'POST':
 		hoodform = HoodForm(request.POST)
 		if hoodform.is_valid():
 			print('valid!')
 			name = hoodform.cleaned_data['name']
 			hood = UserHood(name=name)
-			hood.user = current_user
+			hood.user = user
 			hood.save()
-			return redirect('profile')
+			return redirect('profile',user.id)
 	else:
 		hoodform = HoodForm()
 	return render(request,'user/hood.html',{"hoodform":hoodform})
 
 @login_required
-def profile(request,pk):
-	profile = UserProfile.objects.filter(pk=pk)
+def profile(request,id):
+	profile = UserProfile.objects.filter(pk=id)
 	user = request.user
 	if request.method == 'POST':
 		profileform = ProfileForm(request.POST, request.FILES)
