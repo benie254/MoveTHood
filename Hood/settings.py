@@ -115,7 +115,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['first_name', 'last_name','email']
+# SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['first_name', 'last_name','email']
 
 # social auth configs for github
 SOCIAL_AUTH_GITHUB_KEY = 'c7b8911cdc4b8a0e9285'
