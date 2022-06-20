@@ -84,8 +84,8 @@ class Business(models.Model):
     hood = models.ForeignKey(UserHood,on_delete=models.DO_NOTHING, null=True)
 
     @classmethod
-    def search_by_location(cls, location_term):
-        businesses = cls.objects.filter(location__location=location_term)
+    def search_by_location(cls, search_term):
+        businesses = cls.objects.filter(hood_name__icontains=search_term)
         return businesses
 
 
