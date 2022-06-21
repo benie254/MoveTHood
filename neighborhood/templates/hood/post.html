@@ -1,0 +1,9 @@
+{%load bootstrap5%}
+
+{%block content%}
+<form method="post" action="{% url 'biz' %}" enctype="multipart/form-data" style="text-align:center;">
+            {% csrf_token %}
+            {% bootstrap_form postform layout='inline' %}
+            <button type="submit" class="btn btn-sm btn-outline-dark btn-success" value="Post" style="margin-top:1.5%;">Add business</button>
+</form>
+{%endblock%}
