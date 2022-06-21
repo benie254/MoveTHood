@@ -48,5 +48,5 @@ class BusinessForm(forms.ModelForm):
 
 class PostForm(forms.ModelForm):
     class Meta:
-        models = UserPost
+        model = UserPost
         fields = ('title','description',)
