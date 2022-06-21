@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser,User, PermissionsMixin,BaseUserManager
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -45,14 +45,12 @@ class Location(models.Model):
 
 class UserHood(models.Model):
     name = map_fields.AddressField(max_length=200,default='')
-
     user = models.OneToOneField(MyUser, on_delete=models.DO_NOTHING,null=True)
 
 
 class UserProfile(models.Model):
     bio = models.TextField(default='')
     created = models.DateTimeField(auto_now_add=True, null=True)
-
     user = models.OneToOneField(MyUser, on_delete=models.DO_NOTHING,null=True)
 
     def save(self,*args,**kwargs):
@@ -63,7 +61,6 @@ class UserPost(models.Model):
     title = models.CharField(max_length=60,null=False,default='')
     description = models.TextField(default='')
     published = models.DateTimeField(auto_now_add=True,null=True)
-
     author = models.ForeignKey(MyUser,on_delete=models.DO_NOTHING,null=True)
 
 
@@ -74,7 +71,6 @@ class Business(models.Model):
     email = models.EmailField(max_length=150)
     phone = models.PositiveIntegerField(default=254,)
     published = models.DateTimeField(auto_now_add=True, null=True)
-
     user = models.OneToOneField(MyUser,on_delete=models.DO_NOTHING,null=True)
     hood = models.ForeignKey(UserHood,on_delete=models.DO_NOTHING, null=True)
 
@@ -89,7 +85,6 @@ class Chama(models.Model):
     description = models.TextField()
     created = models.DateTimeField(auto_now_add=True, null=True)
     address = map_fields.AddressField(max_length=200, default='')
-
     member = models.ForeignKey(MyUser,on_delete=models.DO_NOTHING,null=True)
 
 
@@ -111,12 +106,15 @@ class HealthDept(models.Model):
     hood = map_fields.AddressField(max_length=200, default='')
     created = models.DateTimeField(auto_now_add=True,null=True)
 
+
 class Quote:
     author = models.CharField(max_length=300,null=True)
     quote = models.CharField(max_length=300,null=True)
 
+
 class LocationUpdate(models.Model):
     new_address = map_fields.AddressField(max_length=200, default='')
+
 
 class HoodUpdate(models.Model):
     new_hood_name = map_fields.AddressField(max_length=200, default='')
