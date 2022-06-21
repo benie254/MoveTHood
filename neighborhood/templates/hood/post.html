@@ -7,7 +7,7 @@
 
     <div class="col-md-4" style="margin-left:30%;margin-top:2.5%;">
         <h4 class="text-center" style="margin-bottom:5%">What are your thoughts?</h4>
-        <form method="post" action="{% url 'biz' %}" enctype="multipart/form-data" style="text-align:center;">
+        <form method="post" action="{% url 'post' %}" enctype="multipart/form-data" style="text-align:center;">
             {% csrf_token %}
             {% bootstrap_form postform%}
             <button type="submit" class="btn btn-md btn-outline-info btn-dark" value="Post" style="margin-top:1.5%;">Post</button>
