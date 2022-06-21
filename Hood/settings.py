@@ -88,6 +88,9 @@ INSTALLED_APPS = [
     'django_google_maps',
 ]
 
+# important for working with custom user model
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'neighborhood.MyUser'
 
 REST_FRAMEWORK = {
