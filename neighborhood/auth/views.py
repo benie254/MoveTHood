@@ -32,6 +32,7 @@ class MyRegView(View):
 			return redirect(to='/user/info/locale/')
 		return render(request, self.template_name, {"regform": regform})
 
+
 class MyLoginView(LoginView):
 	form_class = MyLoginForm
 
