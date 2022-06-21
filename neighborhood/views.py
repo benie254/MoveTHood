@@ -1,8 +1,7 @@
-from django.shortcuts import render, redirect,Http404
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from neighborhood.forms import UserUpdateForm, ProfileUpdateForm,LocationForm,HoodForm,ProfileForm,BusinessForm,PostForm,UpdateLocation,UpdateHood
-from neighborhood.models import Location,UserHood,UserProfile,Business,MyUser,UserPost,Chama,PoliceDept,HealthDept,LocationUpdate,HoodUpdate
+from neighborhood.forms import LocationForm,HoodForm,ProfileForm,BusinessForm,PostForm,UpdateLocation,UpdateHood
+from neighborhood.models import Location,UserHood,UserProfile,Business,UserPost,PoliceDept,HealthDept,LocationUpdate,HoodUpdate
 from neighborhood.api.serializers import PoliceSerializer,HealthSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -21,8 +20,9 @@ def home(request):
 
 	return render(request, 'hood/index.html',{"posts":posts,"userloc":userloc})
 
+
+@login_required
 def post(request):
-	current_user = request.user
 	if request.method == 'POST':
 		postform = PostForm(request.POST)
 		if postform.is_valid():
@@ -36,9 +36,9 @@ def post(request):
 		postform = PostForm()
 	return render(request,'hood/post.html',{"postform":postform})
 
+
 @login_required
 def location(request):
-	current_user = request.user
 	if request.method == 'POST':
 		locform = LocationForm(request.POST)
 		if locform.is_valid():
@@ -51,6 +51,7 @@ def location(request):
 	else:
 		locform = LocationForm()
 	return render(request,'user/location.html',{"locform":locform})
+
 
 @login_required
 def update_location(request):
@@ -68,6 +69,7 @@ def update_location(request):
 		updateloc = UpdateLocation()
 	return render(request,'user/update_location.html',{"updateloc":updateloc})
 
+
 @login_required
 def hood(request):
 	user = request.user
@@ -84,6 +86,7 @@ def hood(request):
 		hoodform = HoodForm()
 	return render(request,'user/hood.html',{"hoodform":hoodform})
 
+
 @login_required
 def update_hood(request):
 	user = request.user
@@ -99,6 +102,7 @@ def update_hood(request):
 	else:
 		updatehood = UpdateHood()
 	return render(request,'user/update_hood.html',{"updatehood":updatehood})
+
 
 @login_required
 def profile(request,id):
@@ -126,6 +130,7 @@ def profile(request,id):
 
 	return render(request,'user/profile.html',{"profileform":profileform,"profile":profile,"userloc":userloc,"businesses":businesses,"posts":posts,"quotes":quotes,"userhood":userhood,"updatedloc":updatedloc,"updatedhood":updatedhood})
 
+
 @login_required
 def biz(request):
 	if request.method == 'POST':
@@ -145,6 +150,7 @@ def biz(request):
 
 	return render(request,'hood/business.html',{"bizform":bizform})
 
+
 def search(request):
 	user = request.user
 	userloc = Location.objects.filter(id=user.id)
@@ -161,31 +167,13 @@ def search(request):
 
 		return render(request,'projects/search_results.html',{"message":message})
 
-# @login_required
-# def profile(request):
-# 	title = 'Profile'
-# 	update_user_form = UserUpdateForm
-# 	update_profile_form = ProfileUpdateForm
-# 	if request.method == 'POST':
-# 		update_user_form = UserUpdateForm(request.POST,instance=request.user)
-# 		update_profile_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.userprofile)
-# 		if update_user_form.is_valid() and update_profile_form.is_valid():
-# 			update_user_form.save()
-# 			update_profile_form.save()
-# 			messages.success(request,'Profile successfully updated!')
-# 			return redirect(to='profile')
-# 		else:
-# 			update_user_form = UserUpdateForm(instance=request.user)
-# 			update_profile_form = ProfileUpdateForm(instance=request.user.profile)
-# 		return render(request,'user/profile.html',{'update_user_form':update_user_form,'update_profile_form':update_profile_form})
-# 	return render(request,'user/profile.html',{"title":title,'update_user_form':update_user_form,'update_profile_form':update_profile_form})
-#
 
 class NearbyPoliceDepts(APIView):
 	def get(self,request, format=None):
 		police = PoliceDept.objects.all()
 		serializers = PoliceSerializer(police,many=True)
 		return Response(serializers.data)
+
 
 class NearbyHealthDepts(APIView):
 	def get(self,request, format=None):
