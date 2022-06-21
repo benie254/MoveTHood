@@ -1,6 +1,6 @@
 from django_registration.forms import RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
-from neighborhood.models import MyUser,UserProfile,Location,UserHood,Business
+from neighborhood.models import MyUser,UserProfile,Location,UserHood,Business,UserPost
 from django import forms
 
 
@@ -45,3 +45,8 @@ class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
         fields = ('name','description','hood_name','email','phone',)
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        models = UserPost
+        fields = ('title','description',)
