@@ -101,7 +101,7 @@ class PoliceDept(models.Model):
     email = models.EmailField(max_length=150)
     phone = models.PositiveIntegerField(default=254,validators=[MinValueValidator(1),MaxValueValidator(10)])
     address = map_fields.AddressField(max_length=200, default='')
-    policechief = models.CharField(max_length=60,default='')
+    police_chief = models.CharField(max_length=60,default='')
     created = models.DateTimeField(auto_now_add=True,null=True)
 
 
