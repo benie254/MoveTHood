@@ -1,8 +1,7 @@
-from django.contrib.auth.models import AbstractBaseUser,User, PermissionsMixin,BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUserManager
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from PIL import Image
 from django_google_maps import fields as map_fields
 from django.core.validators import MaxValueValidator, MinValueValidator
 
