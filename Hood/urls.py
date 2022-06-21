@@ -34,10 +34,6 @@ urlpatterns = [
     path('user/login/',MyLoginView.as_view(redirect_authenticated_user=True,template_name='auth/login.html',authentication_form=MyLoginForm),name='login'),
     path('user/logout/',auth_views.LogoutView.as_view(template_name='auth/login.html'),name='logout'),
     url(r'^oauth/',include('social_django.urls',namespace='social')),
-    path('api/hood/business/',views.HoodBusiness.as_view()),
-    path('api/hood/business/<address>/',views.HoodBusiness.as_view()),
-    path('api/hood/posts/<address>/', views.HoodPosts.as_view()),
-    path('api/hood/chamas/<address>/', views.HoodChamas.as_view()),
-    path('api/hood/police/<address>/', views.HoodPolice.as_view()),
-    path('api/hood/health/<address>/', views.HoodHealth.as_view()),
+    path('api/hood/police/nearby/', views.NearbyPoliceDepts.as_view()),
+    path('api/hood/health/nearby/', views.NearbyHealthDepts.as_view()),
 ]
