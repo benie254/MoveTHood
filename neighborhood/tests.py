@@ -16,12 +16,6 @@ class UserHoodTestClass(TestCase):
 	def test_instance(self):
 		self.assertTrue(isinstance(self.new_hood,UserHood))
 
-	# test the save method
-	def test_save_method(self):
-		self.new_hood.save()
-		hoods = UserHood.objects.all()
-		self.assertTrue(len(hoods) > 0)
-
 	def tearDown(self):
 		UserHood.objects.filter(name=self.id).delete()
 
@@ -46,12 +40,6 @@ class UserProfileTestClass(TestCase):
 	def test_instance(self):
 		self.assertTrue(isinstance(self.new_profile, UserProfile))
 
-	# test the save method
-	def test_save_method(self):
-		self.new_profile.save()
-		profiles = UserProfile.objects.all()
-		self.assertTrue(len(profiles) > 0)
-
 	def tearDown(self):
 		UserProfile.objects.filter(bio=self.id).delete()
 
@@ -72,12 +60,6 @@ class LocationTestClass(TestCase):
 	def test_instance(self):
 		self.assertTrue(isinstance(self.new_location, Location))
 
-	# test the save method
-	def test_save_method(self):
-		self.new_location.save()
-		profiles = Location.objects.all()
-		self.assertTrue(len(profiles) > 0)
-
 	def tearDown(self):
 		Location.objects.filter(address=self.id).delete()
 
@@ -94,12 +76,6 @@ class UserPostTestClass(TestCase):
 	# test instance
 	def test_instance(self):
 		self.assertTrue(isinstance(self.new_post, UserPost))
-
-	# test the save method
-	def test_save_method(self):
-		self.new_post.save()
-		posts = UserPost.objects.all()
-		self.assertTrue(len(posts) > 0)
 
 	def tearDown(self):
 		UserPost.objects.filter(title=self.id).delete()
@@ -120,12 +96,6 @@ class BusinessTestClass(TestCase):
 	# test instance
 	def test_instance(self):
 		self.assertTrue(isinstance(self.new_business, Business))
-
-	# test the save method
-	def test_save_method(self):
-		self.new_business.save()
-		businesses = Business.objects.all()
-		self.assertTrue(len(businesses) > 0)
 
 	def tearDown(self):
 		Business.objects.filter(name=self.id).delete()
@@ -151,12 +121,6 @@ class PoliceDeptTestClass(TestCase):
 	def test_instance(self):
 		self.assertTrue(isinstance(self.new_dept, PoliceDept))
 
-	# test the save method
-	def test_save_method(self):
-		self.new_dept.save()
-		policedepts = PoliceDept.objects.all()
-		self.assertTrue(len(policedepts) > 0)
-
 	def tearDown(self):
 		PoliceDept.objects.filter(name=self.id).delete()
 
@@ -169,12 +133,6 @@ class HealthDeptTestClass(TestCase):
 	# test instance
 	def test_instance(self):
 		self.assertTrue(isinstance(self.new_health_dept, HealthDept))
-
-	# test the save method
-	def test_save_method(self):
-		self.new_health_dept.save()
-		healthdepts = HealthDept.objects.all()
-		self.assertTrue(len(healthdepts) > 0)
 
 	def tearDown(self):
 		HealthDept.objects.filter(name=self.id).delete()
