@@ -4,6 +4,9 @@
 
 
 {%block content%}
+<body style="background-color:#fca311;">
+
+</body>
 
 <div class="container">
     <div class="row" style="margin-top:2.5%;">
@@ -24,17 +27,17 @@
 
 <div class="container">
     <div class="row" style="margin-top:1.5%;">
-    {%if profile%}
+
     <div class="col-lg-2">
         <img src="{%static 'photos/avatar-3814049_640.png'%}" alt="Change profile photo" class="cuser-p-photo img-responsive" width="150" height="150" style="border-radius:50%;">
     </div>
     <div class="col-lg-4">
+                {%if profile%}
+        {%for profile in profile%}
         <h1>{{user.username}}</h1>
-        {%for p in profile%}
-        <h6>{{p.bio}}</h6>
+        <h6>{{profile.bio}}</h6>
         {%endfor%}
         {%else%}
-        <div class="col-sm-4"></div>
         <div class="col-sm-4">
             <form method="post" action="{% url 'profile' user.id%}" enctype="multipart/form-data" style="text-align:center;">
                 {% csrf_token %}
@@ -42,8 +45,41 @@
                 <button type="submit" class="btn btn-sm btn-outline-dark btn-success" value="Post" style="margin-top:1.5%;">Update profile</button>
             </form>
         </div>
-        <div class="col-sm-4"></div>
         {%endif%}
+        <div class="row" style="margin-top:5%;">
+            <div class="col-md-4"><span class="p-loc">Location</span></div>
+            <div class="col-md-4" style="font-size:small;"><span class="p-loc">Neighborhood</span></div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row">
+        {%if userloc%}
+        <div class="col-md-4">
+            {%if updatedloc%}
+            <h5>{{updatedloc.new_address}}</h5>
+            <a href="{%url 'update-loc'%}" style="font-size:10px;" type="button" class="btn btn-sm btn-outline-info btn-dark">update?</a>
+            {%else%}
+            {%for userloc in userloc%}
+            <h5>{{userloc.address}}</h5>
+            <a href="{%url 'update-loc'%}" style="font-size:10px;" type="button" class="btn btn-sm btn-outline-info btn-dark">update?</a>
+            {%endfor%}
+            {%endif%}
+        </div>
+        {%endif%}
+        {%if userhood%}
+        <div class="col-md-4">
+            {%if updatedhood%}
+            <h5>{{updatedhood.new_hood_name}}</h5>
+            <a href="{%url 'update-hood'%}" style="font-size:10px;" type="button" class="btn btn-sm btn-outline-info btn-dark">update?</a>
+            {%else%}
+            {%for userhood in userhood%}
+            <h5>{{userhood.name}}</h5>
+            <a href="{%url 'update-hood'%}" style="font-size:10px;" type="button" class="btn btn-sm btn-outline-info btn-dark">update?</a>
+            {%endfor%}
+            {%endif%}
+        </div>
+        {%endif%}
+            <div class="col-md-4"></div>
+            </div>
         <hr style="margin-top:1.5%;">
         <div class="row">
             <div class="col-sm-4">
@@ -63,11 +99,11 @@
         </div>
         <div class="row">
             <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/api/hood/health/nearby/">Health Nearby</a>
+                <li class="nav-item" style="margin-right:1.5%;">
+                    <a class="nav-link active btn btn-sm btn-outline-dark btn-info" type="button" aria-current="page" href="/api/hood/health/nearby/" >Health Nearby</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/api/hood/police/nearby/">Police Nearby</a>
+                    <a class="nav-link active btn btn-sm btn-outline-dark btn-info" type="button" href="/api/hood/police/nearby/">Police Nearby</a>
                 </li>
             </ul>
         </div>
@@ -79,12 +115,17 @@
 <hr>
 <div class="container">
 
-    <div class="card" style="width:25%;">
-        <div class="card-title">
-            <h6>Your posts will appear here</h6>
-            <a class="card-text">Share something?</a>
-        </div>
+    <div class="card" style="margin-bottom:2.5%;width:75%;margin-left:10%;margin-top:5%;">
+    <div class="card-header">
+    Random Quote
     </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p>{{quotes.quote}}</p>
+          <footer><cite title="Author">{{quotes.author}} <a href="{{quotes.permalink}}" style="float:right;">Visit source</a></cite></footer>
+      </blockquote>
+    </div>
+  </div>
 </div>
 
 </div>

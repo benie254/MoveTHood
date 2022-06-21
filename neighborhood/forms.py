@@ -1,6 +1,6 @@
 from django_registration.forms import RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
-from neighborhood.models import MyUser,UserProfile,Location,UserHood,Business,UserPost
+from neighborhood.models import MyUser,UserProfile,Location,UserHood,Business,UserPost,HoodUpdate,LocationUpdate
 from django import forms
 
 
@@ -50,3 +50,13 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = UserPost
         fields = ('title','description',)
+
+class UpdateLocation(forms.ModelForm):
+    class Meta:
+        model = LocationUpdate
+        fields = ('new_address',)
+
+class UpdateHood(forms.ModelForm):
+    class Meta:
+        model = HoodUpdate
+        fields = ('new_hood_name',)

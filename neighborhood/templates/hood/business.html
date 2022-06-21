@@ -4,11 +4,15 @@
 {%load crispy_forms_tags%}
 
 {%block content%}
+<body style="background-color:#e5e5e5;">
+
+</body>
 <div class="container">
     <div class="col-md-4"></div>
 
     <div class="col-md-4" style="margin-left:30%;margin-top:2.5%;">
-        <h4 class="text-center" style="margin-bottom:5%">Tell us about this business</h4>
+        <h4 class="text-center">Tell us about your business</h4>
+        <h6 class="text-center" style="margin-bottom:5%">Or one you know about</h6>
         <form method="post" action="{% url 'biz' %}" enctype="multipart/form-data" style="text-align:center;">
             {% csrf_token %}
             {{bizform|crispy}}

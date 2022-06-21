@@ -4,12 +4,64 @@
 
 
 {%block content%}
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
+<body style="background-color:#e5e5e5;">
 
-        </div>
-    </div>
+</body>
+<div style="background-image:url('https://res.cloudinary.com/benie/image/upload/v1655794463/social-media-5187243_1920_ylisgu.png');background-repeat:no-repeat;background-size:cover;background-position:center;padding-top:32.5%;padding-bottom:15%;">
 
 </div>
+<div class="container">
+
+            {%if userloc%}
+            {%if posts%}
+    <h1 class="text-center" style="margin-top:2.5%;">Only in {{userloc.name}}</h1>
+
+            <div class="row" style="margin-top:2.5%;">
+                {%for p in posts%}
+                <div class="col-sm-4">
+                    <div class="card border-info mb-3">
+                        <div class="card-header">{{user.username}}</div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{p.title}}</h5>
+                            <p class="card-text">{{p.description}}</p>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+            {%else%}
+    <div class="row" style="margin-top:2.5%;">
+        <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="card border-info mb-3">
+                        <div class="card-header"><strong>{{userloc.name}}</strong> <span style="font-size:small;">hood</span></div>
+                        <div class="card-body">
+                            <h5 class="card-title">Hello, {{user.username}}</h5>
+                            <p class="card-text">Nothing has been posted yet. <a href="{%url 'post' %}">Share now?</a></p>
+                        </div>
+                    </div>
+                </div>
+        <div class="col-md-4"></div>
+
+    </div>
+
+            {%endif%}
+            {%else%}
+    <div class="row" style="margin-top:2.5%;">
+        <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="card border-info mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{user.username}},</h5>
+                            <p class="card-text">Please register a location to view some posts. <a href="{%url 'location' %}">Do it now?</a></p>
+                        </div>
+                    </div>
+                </div>
+        <div class="col-md-4"></div>
+
+    </div>
+
+            {%endif%}
+        </div>
+
 {%endblock%}

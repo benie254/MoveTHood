@@ -64,8 +64,6 @@ class UserPost(models.Model):
     title = models.CharField(max_length=60,null=False,default='')
     description = models.TextField(default='')
     published = models.DateTimeField(auto_now_add=True,null=True)
-    address = map_fields.AddressField(max_length=200, default='')
-
 
     author = models.ForeignKey(MyUser,on_delete=models.DO_NOTHING,null=True)
 
@@ -75,7 +73,7 @@ class Business(models.Model):
     description = models.TextField()
     hood_name = map_fields.AddressField(max_length=200, default='')
     email = models.EmailField(max_length=150)
-    phone = models.PositiveIntegerField(default=254,validators=[MinValueValidator(1),MaxValueValidator(10)])
+    phone = models.PositiveIntegerField(default=254,)
     published = models.DateTimeField(auto_now_add=True, null=True)
 
     user = models.OneToOneField(MyUser,on_delete=models.DO_NOTHING,null=True)
@@ -113,3 +111,13 @@ class HealthDept(models.Model):
     address = map_fields.AddressField(max_length=200, default='')
     hood = map_fields.AddressField(max_length=200, default='')
     created = models.DateTimeField(auto_now_add=True,null=True)
+
+class Quote:
+    author = models.CharField(max_length=300,null=True)
+    quote = models.CharField(max_length=300,null=True)
+
+class LocationUpdate(models.Model):
+    new_address = map_fields.AddressField(max_length=200, default='')
+
+class HoodUpdate(models.Model):
+    new_hood_name = map_fields.AddressField(max_length=200, default='')
