@@ -1,12 +1,10 @@
 import urllib.request,json
-from .models import Quote
 
 
 def get_quotes():
     """
     :return: quotes results
     """
-
     get_quotes_url = 'http://quotes.stormconsultancy.co.uk/random.json'
 
     with urllib.request.urlopen(get_quotes_url) as url:

@@ -17,7 +17,6 @@ def home(request):
 	print(user)
 	print(userloc)
 	print(posts)
-
 	return render(request, 'hood/index.html',{"posts":posts,"userloc":userloc})
 
 
@@ -127,7 +126,6 @@ def profile(request,id):
 		return redirect('profile',user.id)
 	else:
 		profileform = ProfileForm
-
 	return render(request,'user/profile.html',{"profileform":profileform,"profile":profile,"userloc":userloc,"businesses":businesses,"posts":posts,"quotes":quotes,"userhood":userhood,"updatedloc":updatedloc,"updatedhood":updatedhood})
 
 
@@ -147,7 +145,6 @@ def biz(request):
 			return redirect('home')
 	else:
 		bizform = BusinessForm
-
 	return render(request,'hood/business.html',{"bizform":bizform})
 
 
