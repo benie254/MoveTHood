@@ -53,27 +53,22 @@
                 <p>0 projects</p>
                 {%endif%}
             </div>
-            <div class="col-sm-4">
-                {%if chamas%}
-                <p><span><strong>{{chamas|length}}</strong></span> chamas</p>
-                {%else%}
-                <p>0 chamas</p>
-                {%endif%}
-            </div>
-            <div class="col-sm-4">
-                {%if businesses%}
-                <p><span><strong>{{businesses|length}}</strong></span> businesses</p>
-                {%else%}
-                <p>0 businesses</p>
-                {%endif%}
-            </div>
         </div>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/api/hood/health/nearby/">Health Nearby</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/api/hood/police/nearby/">Police Nearby</a>
+            </li>
+        </ul>
     </div>
     <div class="col-lg-4"></div>
 </div>
 
 <hr>
 <div class="container">
+
     <div class="card" style="width:25%;">
         <div class="card-title">
             <h6>Your posts will appear here</h6>
