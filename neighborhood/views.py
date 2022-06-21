@@ -47,22 +47,22 @@ def hood(request):
 
 @login_required
 def profile(request,id):
-	profile = UserProfile.objects.filter(pk=id)
+	profile = UserProfile.objects.all().filter(id=id)
+	location = Location.objects.all().filter(id=id)
 	user = request.user
 	if request.method == 'POST':
 		profileform = ProfileForm(request.POST, request.FILES)
 		if profileform.is_valid():
 			print('valid!')
 			bio = profileform.cleaned_data['bio']
-			avatar = profileform.cleaned_data['avatar']
-			profile = UserProfile(bio=bio, avatar=avatar)
-			profile.user = user
+			profile = UserProfile(bio=bio,)
+			# profile.user = user
 			profile.save()
 		return redirect('profile',user.id)
 	else:
 		profileform = ProfileForm
 
-	return render(request,'user/profile.html',{"profileform":profileform,"profile":profile})
+	return render(request,'user/profile.html',{"profileform":profileform,"profile":profile,"location":location})
 
 @login_required
 def biz(request):
@@ -135,7 +135,7 @@ class HoodPosts(APIView):
 	def get(self, request, address, format=None):
 		userloc = UserHood.objects.get(name=address)
 		posts = UserPost.objects.filter(address=address)
-		print(userloc)
+		# print(userloc)
 		print(posts)
 		serializers = PostSerializer(posts, many=True)
 		return Response(serializers.data)

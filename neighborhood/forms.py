@@ -24,7 +24,7 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('avatar','bio')
+        fields = ('bio',)
 
 class LocationForm(forms.ModelForm):
     class Meta:
@@ -39,7 +39,7 @@ class HoodForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('bio','avatar')
+        fields = ('bio',)
 
 class BusinessForm(forms.ModelForm):
     class Meta:

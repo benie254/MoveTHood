@@ -51,9 +51,7 @@ class UserHood(models.Model):
 
 
 class UserProfile(models.Model):
-    display_name = models.CharField(max_length=60,null=False,default='')
     bio = models.TextField(default='')
-    avatar = models.ImageField(default='tester.png')
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     user = models.OneToOneField(MyUser, on_delete=models.DO_NOTHING,null=True)

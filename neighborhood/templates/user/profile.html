@@ -26,15 +26,17 @@
     <div class="row" style="margin-top:1.5%;">
     {%if profile%}
     <div class="col-lg-2">
-        <img src="{{profile.avatar.url}}" alt="Change profile photo" class="cuser-p-photo img-responsive" width="150" height="150" style="border-radius:50%;">
+        <img src="{%static 'photos/avatar-3814049_640.png'%}" alt="Change profile photo" class="cuser-p-photo img-responsive" width="150" height="150" style="border-radius:50%;">
     </div>
     <div class="col-lg-4">
-        <h1>{{username}}</h1>
-        <h6>{{profile.bio}}</h6>
+        <h1>{{user.username}}</h1>
+        {%for p in profile%}
+        <h6>{{p.bio}}</h6>
+        {%endfor%}
         {%else%}
         <div class="col-sm-4"></div>
         <div class="col-sm-4">
-            <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data" style="text-align:center;">
+            <form method="post" action="{% url 'profile' user.id%}" enctype="multipart/form-data" style="text-align:center;">
                 {% csrf_token %}
                 {% bootstrap_form profileform layout='inline' %}
                 <button type="submit" class="btn btn-sm btn-outline-dark btn-success" value="Post" style="margin-top:1.5%;">Update profile</button>
@@ -71,44 +73,14 @@
 </div>
 
 <hr>
-
-{%if contact%}
-    <div class="container">
-        <div class="table-responsive">
-        <table class="table table-striped-columns table-hover" style="width:80%;margin-left:7.5%;">
-    <thead class="table-info">
-    <tr class="table-active">
-        <th scope="col">First name</th>
-        <th scope="col">Last name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Phone</th>
-        <th scope="col">Address</th>
-    </tr>
-  </thead>
-    <tbody class="table-success">
-    <tr class="table-active">
-        <td class="table-active">{{contact.first_name}}</td>
-        <td class="table-active">{{contact.last_name}}</td>
-        <td class="table-active">{{contact.email}}</td>
-        <td class="table-active">{{contact.phone}}</td>
-        <td class="table-active">{{contact.address}}</td>
-    </tr>
-    </tbody>
-</table>
-    </div>
-    </div>
-{%else%}
-    <div class="container">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <p>Add your contact details <a href="" type="button" class="btn btn-outline-info btn-dark btn-sm">here</a></p>
+<div class="container">
+    <div class="card" style="width:25%;">
+        <div class="card-title">
+            <h6>Your posts will appear here</h6>
+            <a class="card-text">Share something?</a>
         </div>
-        <div class="col-md-4"></div>
     </div>
-
-{%endif%}
-<hr>
-
+</div>
 
 </div>
 </div>
