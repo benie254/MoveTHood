@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from neighborhood.models import Business,UserPost,Chama,HealthDept,PoliceDept
+from neighborhood.models import HealthDept,PoliceDept
 
 
 class PoliceSerializer(serializers.ModelSerializer):
