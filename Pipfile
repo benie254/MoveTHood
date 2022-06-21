@@ -23,7 +23,6 @@ psycopg2 = "*"
 pytz = "*"
 gunicorn = "*"
 django-registration = "==3.3"
-social-auth-app-django = "*"
 django-google-maps = "*"
 
 [dev-packages]
