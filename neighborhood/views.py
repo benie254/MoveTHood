@@ -116,13 +116,13 @@ def search(request):
 # 	return render(request,'user/profile.html',{"title":title,'update_user_form':update_user_form,'update_profile_form':update_profile_form})
 #
 
-class NearbyPoliceDepartments(APIView):
+class NearbyPoliceDepts(APIView):
 	def get(self,request, format=None):
 		police = PoliceDept.objects.all()
 		serializers = PoliceSerializer(police,many=True)
 		return Response(serializers.data)
 
-class NearbyHealthDepartments(APIView):
+class NearbyHealthDepts(APIView):
 	def get(self,request, format=None):
 		health = HealthDept.objects.all()
 		serializers = HealthSerializer(health,many=True)
