@@ -74,7 +74,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap5',
 
     'bootstrap5',
     'location_field.apps.DefaultConfig',
