@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+
+
+h1,.navbar-brand,.n-header{
+font-family: 'Titan One';
+}
+.n-header{
+font-size:20px;
+}
+.navbar-brand{
+font-size:30px;
+}
+h2,h3,.btn,.card-header{
+font-family: 'Righteous';
+}
+h4,h5,h6{
+font-family: 'Paytone One';
+}
+p,.p-loc,form{
+font-family: 'Josefin Sans';
+}
+small,footer{
+font-family: 'Caveat';
+}
+a{
+font-family: 'Carter One';
+}
