@@ -116,53 +116,14 @@ def search(request):
 # 	return render(request,'user/profile.html',{"title":title,'update_user_form':update_user_form,'update_profile_form':update_profile_form})
 #
 
-class HoodBusiness(APIView):
-	# def get_biz(self,id):
-	# 	try:
-	# 		return Business.objects.get(location=id)
-	# 	except Business.DoesNotExist:
-	# 		return Http404
-
-	def get(self,request,address, format=None):
-		userloc = UserHood.objects.get(name=address)
-		business = Business.objects.filter(address=address)
-		print(userloc)
-		print(business)
-		serializers = BizSerializer(business,many=True)
+class NearbyPoliceDepartments(APIView):
+	def get(self,request, format=None):
+		police = PoliceDept.objects.all()
+		serializers = PoliceSerializer(police,many=True)
 		return Response(serializers.data)
 
-class HoodPosts(APIView):
-	def get(self, request, address, format=None):
-		userloc = UserHood.objects.get(name=address)
-		posts = UserPost.objects.filter(address=address)
-		# print(userloc)
-		print(posts)
-		serializers = PostSerializer(posts, many=True)
-		return Response(serializers.data)
-
-class HoodChamas(APIView):
-	def get(self, request, address, format=None):
-		userloc = UserHood.objects.get(name=address)
-		chamas = Chama.objects.filter(address=address)
-		print(userloc)
-		print(chamas)
-		serializers = ChamaSerializer(chamas, many=True)
-		return Response(serializers.data)
-
-class HoodPolice(APIView):
-	def get(self, request, address, format=None):
-		userloc = UserHood.objects.get(name=address)
-		police = PoliceDept.objects.filter(address=address)
-		print(userloc)
-		print(police)
-		serializers = PoliceSerializer(police, many=True)
-		return Response(serializers.data)
-
-class HoodHealth(APIView):
-	def get(self, request, address, format=None):
-		userloc = UserHood.objects.get(name=address)
-		health = HealthDept.objects.filter(address=address)
-		print(userloc)
-		print(health)
-		serializers = HealthSerializer(health, many=True)
+class NearbyHealthDepartments(APIView):
+	def get(self,request, format=None):
+		health = HealthDept.objects.all()
+		serializers = HealthSerializer(health,many=True)
 		return Response(serializers.data)
