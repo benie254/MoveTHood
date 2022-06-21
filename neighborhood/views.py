@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from neighborhood.forms import UserUpdateForm, ProfileUpdateForm,LocationForm,HoodForm,ProfileForm,BusinessForm
 from neighborhood.models import Location,UserHood,UserProfile,Business,MyUser,UserPost,Chama,PoliceDept,HealthDept
-from neighborhood.api.serializers import BizSerializer,PostSerializer,ChamaSerializer,PoliceSerializer,HealthSerializer
+from neighborhood.api.serializers import PoliceSerializer,HealthSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
