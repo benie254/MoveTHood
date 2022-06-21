@@ -25,7 +25,7 @@ from neighborhood.views import biz,search,post
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home,name='home'),
-    path('hood/post/add',post,name='post'),
+    path('hood/post/add/',post,name='post'),
     path('hood/business/add/',biz,name='biz'),
     path('search/term/',search,name='search'),
     path('user/info/locale/',location,name='location'),
