@@ -18,22 +18,9 @@ The custom api queries the app's database for neighborhood businesses and contac
 >The app supports `CRUD` functionalities to Create, Read, Update, and Delete images and their content/details. 
 
 
-## Screenshot--Landing Page
+## Screenshot--login Page
 
-<img src="https://user-images.githubusercontent.com/99865051/173784989-bc5eea15-5e20-43f6-a27e-c0e43170e21f.png" >
-
-## Screenshot--Project Page
-
-<img src="https://user-images.githubusercontent.com/99865051/173785021-a7e49942-2251-4110-af87-82b9c9daf3c4.png">
-
-## Screenshot--Project Form
-
-<img src="https://user-images.githubusercontent.com/99865051/173787738-9a2bf85d-7794-4e7c-8258-47eafc7e6e2b.png">
-
-## Screenshot--Profile Page 
-
-<img src="https://user-images.githubusercontent.com/99865051/173787857-45865fd3-1a91-4a7a-a5a4-2358724f24cd.png">
-
+<img src="https://user-images.githubusercontent.com/99865051/174801380-d92c2c7e-333a-48d9-adf8-da7ef41cce0c.png" >
 
 ## Behavior Driven Development--BDD
 
