@@ -23,7 +23,7 @@ def post(request):
 			description = postform.cleaned_data['description']
 			post = UserPost(title=title,description=description)
 			post.save()
-			return redirect('hood')
+			return redirect('home')
 	else:
 		postform = PostForm()
 	return render(request,'hood/post.html',{"postform":postform})
