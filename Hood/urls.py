@@ -20,11 +20,12 @@ from neighborhood.auth.views import MyRegView,MyLoginView
 from neighborhood.views import home,profile,location,hood
 from neighborhood.forms import MyLoginForm
 from neighborhood import views
-from neighborhood.views import biz,search
+from neighborhood.views import biz,search,post
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home,name='home'),
+    path('hood/post/add',post,name='post'),
     path('hood/business/add/',biz,name='biz'),
     path('search/term/',search,name='search'),
     path('user/info/locale/',location,name='location'),
