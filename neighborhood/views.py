@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect,Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from neighborhood.forms import UserUpdateForm, ProfileUpdateForm,LocationForm,HoodForm,ProfileForm,BusinessForm
+from neighborhood.forms import UserUpdateForm, ProfileUpdateForm,LocationForm,HoodForm,ProfileForm,BusinessForm,PostForm
 from neighborhood.models import Location,UserHood,UserProfile,Business,MyUser,UserPost,Chama,PoliceDept,HealthDept
 from neighborhood.api.serializers import PoliceSerializer,HealthSerializer
 from rest_framework.response import Response
@@ -12,6 +12,21 @@ from rest_framework.views import APIView
 @login_required
 def home(request):
 	return render(request, 'hood/index.html')
+
+def post(request):
+	current_user = request.user
+	if request.method == 'POST':
+		postform = PostForm(request.POST)
+		if postform.is_valid():
+			print('valid!')
+			title = postform.cleaned_data['title']
+			description = postform.cleaned_data['description']
+			post = UserPost(title=title,description=description)
+			post.save()
+			return redirect('hood')
+	else:
+		postform = PostForm()
+	return render(request,'hood/post.html',{"postform":postform})
 
 @login_required
 def location(request):
