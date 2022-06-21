@@ -92,7 +92,7 @@ def biz(request):
 			phone = bizform.cleaned_data['phone']
 			biz = Business(name=name,description=description,hood_name=hood_name,email=email,phone=phone)
 			biz.save()
-			return redirect('biz')
+			return redirect('home')
 	else:
 		bizform = BusinessForm
 
