@@ -50,7 +50,14 @@
                {%if posts%}
                 <p><span><strong>{{posts|length}}</strong></span> posts</p>
                 {%else%}
-                <p>0 projects</p>
+                <p>0 posts</p>
+                {%endif%}
+            </div>
+            <div class="col-sm-4">
+               {%if businesses%}
+                <p><span><strong>{{businesses|length}}</strong></span> businesses</p>
+                {%else%}
+                <p>0 businesses</p>
                 {%endif%}
             </div>
         </div>
