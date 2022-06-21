@@ -37,15 +37,28 @@ class MyUser(AbstractBaseUser,PermissionsMixin):
         return self.first_name
 
 
-# content models below
-class Location(models.Model):
-    address = map_fields.AddressField(max_length=200,default='')
-    user = models.OneToOneField(MyUser, on_delete=models.DO_NOTHING, null=True)
-
-
 class UserHood(models.Model):
     name = map_fields.AddressField(max_length=200,default='')
     user = models.OneToOneField(MyUser, on_delete=models.DO_NOTHING,null=True)
+
+    def create_hood(self):
+        self.hood = UserHood(name=self.name)
+        self.hood.save()
+
+    def save_hood(self):
+        self.save()
+
+    def update_hood(self):
+        self.updated_hood = UserHood.objects.filter(id=self.pk).update(name=self.name)
+        self.updated_hood.save()
+
+    @classmethod
+    def get_by_id(cls, id):
+        hood = cls.objects.filter(id=id)
+        return hood
+
+    def delete_hood(self):
+        self.delete()
 
 
 class UserProfile(models.Model):
@@ -55,6 +68,16 @@ class UserProfile(models.Model):
 
     def save(self,*args,**kwargs):
         super().save()
+
+    def update_occupant(self):
+        updated_occupants = UserProfile.objects.filter(id=self.pk).update(bio=self.bio)
+        updated_occupants.save()
+
+
+class Location(models.Model):
+    address = map_fields.AddressField(max_length=200, default='')
+    user = models.OneToOneField(MyUser, on_delete=models.DO_NOTHING, null=True)
+    occupants = models.ForeignKey(UserProfile,on_delete=models.DO_NOTHING,null=True)
 
 
 class UserPost(models.Model):
@@ -74,10 +97,29 @@ class Business(models.Model):
     user = models.OneToOneField(MyUser,on_delete=models.DO_NOTHING,null=True)
     hood = models.ForeignKey(UserHood,on_delete=models.DO_NOTHING, null=True)
 
+    def create_business(self):
+        self.business = Business(name=self.name, description=self.description,hood_name=self.hood_name,email=self.email,phone=self.phone)
+        self.business.save()
+
+    def save_business(self):
+        self.save()
+
+    def update_business(self):
+        self.updated_biz = Business.objects.filter(id=self.pk).update(name=self.name, description=self.description,hood_name=self.hood_name,email=self.email,phone=self.phone)
+        self.updated_biz.save()
+
     @classmethod
     def search_by_location(cls, hood_name):
         businesses = cls.objects.filter(hood_name__icontains=hood_name)
         return businesses
+
+    @classmethod
+    def get_by_id(cls, id):
+        business = cls.objects.filter(id=id)
+        return business
+
+    def delete_business(self):
+        self.delete()
 
 
 class Chama(models.Model):
@@ -114,7 +156,6 @@ class Quote:
 
 class LocationUpdate(models.Model):
     new_address = map_fields.AddressField(max_length=200, default='')
-
 
 class HoodUpdate(models.Model):
     new_hood_name = map_fields.AddressField(max_length=200, default='')
